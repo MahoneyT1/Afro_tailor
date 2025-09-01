@@ -25,7 +25,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
            
            if access:
             response.set_cookie(
-                'access': access,
+                access=access,
                 httponly=True,
                 secure=False,
                 samesite='Lax',
@@ -33,7 +33,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 
             if refresh:
                 response.set_cookie(
-                    'refresh': refresh,
+                    refresh=refresh,
                     httponly=True,
                     secure=False,
                     samesite='Lax',

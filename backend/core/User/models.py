@@ -1,5 +1,13 @@
+"""
+    This file includes User and it's scopes
+    Client: User(client), tenant: User(designer)
+"""
+
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+
+
+
 
 
 class User(AbstractUser):
@@ -12,5 +20,10 @@ class User(AbstractUser):
     phone = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     
+    
     def __str__(self):
         return self.username
+
+    
+
+

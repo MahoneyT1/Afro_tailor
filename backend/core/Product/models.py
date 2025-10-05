@@ -15,8 +15,8 @@ class Product(models.Model):
     category = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    seller = models.ForeignKey('User.User', on_delete=models.CASCADE, related_name='products')
-
+    designer = models.ForeignKey('User.User', on_delete=models.CASCADE, related_name='products')
+    shop = models.OneToOneField('Shop.Shop', on_delete=models.CASCADE, related_name='product', blank=False)
     
     def __str__(self):
         return self.name

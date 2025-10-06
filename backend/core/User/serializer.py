@@ -1,6 +1,7 @@
 """User serializer class
 """
 from rest_framework import serializers
+from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -8,9 +9,10 @@ class UserSerializer(serializers.ModelSerializer):
     products = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
-        model = 'User.User'
+        model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name',
-                   'designer', 'phone', 'address', 'is_active', 'is_staff', 'products')
+                   'is_designer', 'phone', 'address', 'is_active', 
+                   'is_staff', 'products', 'password')
         extra_kwargs = {
             'password': {'write_only': True},
             'is_active': {'read_only': True},
@@ -23,8 +25,16 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'is_active', 'is_staff')
 
     def create(self, validated_data):
+        """
+        Create a new user instance, setting the password properly by hashing.
+        """
+        password = validated_data.pop('password', None)
+
+        if not password:
+            raise(serializers.ValidationError("password are required"))
+
         user = super().create(validated_data)
-        user.set_password(validated_data['password'])
+        user.set_password(password)
         user.save()
         return user
 

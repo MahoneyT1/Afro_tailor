@@ -8,11 +8,11 @@ class UserAdmin(admin.ModelAdmin):
     Custom admin interface for the User model.
     This allows for better management of user accounts in the Django admin panel.
     """
-    list_display = ('username', 'email', 'is_seller', 'phone', 'address',
+    list_display = ('id', 'username', 'email', 'phone', 'address', 'is_designer',
                      'first_name', 'last_name', 'is_active', 'is_staff')
 
     search_fields = ('username', 'email')
-    list_filter = ('is_seller',)
+    list_filter = ('is_designer',)
     ordering = ('username',)
 
     def create(self, request, *args, **kwargs):

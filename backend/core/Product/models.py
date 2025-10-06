@@ -16,7 +16,10 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     designer = models.ForeignKey('User.User', on_delete=models.CASCADE, related_name='products')
-    shop = models.OneToOneField('Shop.Shop', on_delete=models.CASCADE, related_name='product', blank=False)
+    shop = models.OneToOneField('Shop.Shop', 
+                                on_delete=models.CASCADE, 
+                                related_name='product', 
+                                blank=False, null=True)
     
     def __str__(self):
         return self.name

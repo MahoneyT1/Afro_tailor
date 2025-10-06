@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'User',
     'ProductVariant',
     'Auth',
+    'Shop'
 
 ]
 
@@ -89,17 +90,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'afro_tailor_db',
-        'USER': 'afro_tailor',
-        'PASSWORD': 'Drew2325$$',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -161,11 +158,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 SITE_ID = 1
-
-LOGIN_METHODS = ['email', 'username']
 
 
 LOGIN_REDIRECT_URL = '/'

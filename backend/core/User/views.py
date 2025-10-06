@@ -5,19 +5,19 @@ from .serializer import UserSerializer
 from .models import User
 
 
-class CreateUserView(APIView):
+class UserCreateView(APIView):
     """
     View to create a new user.
     """
     def post(self, request, *args, **kwargs):
         serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserDetailView(APIView):
+class UserRetrieveUpdateDeleteView(APIView):
     """
     View to retrieve or update a user.
     """

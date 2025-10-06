@@ -23,3 +23,9 @@ class ShopSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         validated_data['owner'] = user
         return super().create(validated_data)
+    
+    def update(self, instance, validated_data):
+        """Ensure the owner field is not updated."""
+        if 'owner' in validated_data:
+            raise serializers.ValidationError("You cannot change the owner of the shop.")
+        return super().update(instance, validated_data)

@@ -2,6 +2,7 @@
 """
 from rest_framework import serializers
 from .models import User
+from Shop.models import Shop
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -14,7 +14,7 @@ class User(AbstractUser):
     This can be used to add additional fields or methods in the future.
     """
     id = models.UUIDField(default=uuid.uuid4, max_length=36, primary_key=True, editable=False)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, blank=False, null=False)
     phone = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     is_designer = models.BooleanField(default=False, blank=True, null=True)

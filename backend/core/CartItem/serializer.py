@@ -39,3 +39,13 @@ class CartItemSerializer(serializers.ModelSerializer):
         except Exception as e:
             raise serializers.ValidationError(
                 f"Error creating cart item: {str(e)}")
+
+    def update(self, instance, validated_data):
+        """overriding update method to accommodate updating of cart item"""
+        try:
+            instance.quantity = validated_data.get('quantity', instance.quantity)
+            instance.save()
+            return instance
+        except Exception as e:
+            raise serializers.ValidationError(
+                f"Error updating cart item: {str(e)}")

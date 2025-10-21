@@ -37,3 +37,56 @@ class CartListCreateView(APIView):
             return Response(CartSerializer(cart).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, 
                         status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class CartDetailView(APIView):
+    """
+    View to retrieve, update, or delete a cart by ID.
+    """
+
+    def get_object(self, pk):
+        try:
+            return Cart.objects.get(pk=pk)
+        except Cart.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        """
+        Retrieve a cart by ID.
+        """
+        cart = self.get_object(pk)
+        if cart is None:
+            return Response({"detail": "Cart not found."}, 
+                            status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CartSerializer(cart)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk):
+        """
+        Update a cart by ID.
+        """
+        cart = self.get_object(pk)
+        if cart is None:
+            return Response({"detail": "Cart not found."}, 
+                            status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CartSerializer(cart, data=request.data, context={'request': request})
+        if serializer.is_valid():
+            cart = serializer.save()
+            return Response(CartSerializer(cart).data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, 
+                        status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        """
+        Delete a cart by ID.
+        """
+        cart = self.get_object(pk)
+        if cart is None:
+            return Response({"detail": "Cart not found."}, 
+                            status=status.HTTP_404_NOT_FOUND)
+
+        cart.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

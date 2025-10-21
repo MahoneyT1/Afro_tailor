@@ -9,7 +9,11 @@ class CartItem(models.Model):
     of the product in the cart.
     """
     cart = models.ForeignKey('Cart.Cart', on_delete=models.CASCADE, related_name='items')
-    variant = models.ForeignKey('ProductVariant.ProductVariant', on_delete=models.CASCADE, related_name='cart_items')
+    variant = models.ForeignKey(
+        'ProductVariant.ProductVariant', 
+        on_delete=models.CASCADE, 
+        related_name='cart_items'
+    )
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):

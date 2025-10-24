@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'User',
     'ProductVariant',
     'Auth',
-    'Shop'
+    'Shop',
+    'Category'
 
 ]
 

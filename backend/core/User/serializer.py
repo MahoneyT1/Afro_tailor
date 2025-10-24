@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
             'password': {'write_only': True},
             'is_active': {'read_only': True},
             'is_staff': {'read_only': True},
-            'is_designer': {'read_only': True},
+            'is_designer': {'read_only': False},
             'is_client': {'read_only': True},
             'shop': {'read_only': True},
         }

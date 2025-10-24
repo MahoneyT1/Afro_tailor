@@ -34,11 +34,11 @@ class UserRetrieveUpdateDeleteView(APIView):
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
-    def put(self, request, pk, *args, **kwargs):
+    def patch(self, request, pk, *args, **kwargs):
         user = self.get_object(pk)
         if user is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = UserSerializer(user, data=request.data)
+        serializer = UserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             user = serializer.save()
             return Response(UserSerializer(user).data)

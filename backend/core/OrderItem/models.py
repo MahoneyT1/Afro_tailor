@@ -9,8 +9,8 @@ class OrderItem(models.Model):
 
     order = models.ForeignKey('Order.Order', on_delete=models.CASCADE, related_name='items')
     variant = models.ForeignKey('ProductVariant.ProductVariant', on_delete=models.CASCADE, related_name='order_items')
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    
+
     def __str__(self):
         return f"{self.order.id} - {self.variant.product.name} (x{self.quantity})"

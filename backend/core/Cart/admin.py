@@ -7,7 +7,7 @@ class CartAdmin(admin.ModelAdmin):
     Admin interface for Cart model.
     """
 
-    list_display = ('user', 'created_at', 'updated_at')
+    list_display = ['user']
     search_fields = ('user__username',)
     list_filter = ('created_at', 'updated_at')
 
